@@ -77,37 +77,89 @@
 
 // export default App;
 
-// ----------------------------- 원본 끝 ----------------------------
 
 
+// ----------------------------- State ----------------------------
+// import './App.css';
+// import {useState} from 'react';
 
-// ----------------------------- state ----------------------------
-import './App.css';
+// function App(){
+//   let oldMode = ['html','css','javascript'];
+//   let [mode,modeChange] = useState(oldMode);
+
+//   return(
+//     <div className='App'>
+//       <button onClick={
+//         (event)=>{
+//           event.preventDefault();
+//           modeChange(oldMode);
+//           console.log(mode);
+//         }
+//       }>클릭</button>
+//       <ol>
+//         <li>
+//           <a href="/" onClick={(event)=>{
+//             event.preventDefault();
+//             let newMode = [...mode];
+//             newMode[0] ='에이치티엠엘';
+//             modeChange(newMode);
+//           }}>{mode[0]}</a>
+//         </li>
+//         <li>
+//           <a href="/" onClick={(event)=>{
+//             event.preventDefault();
+//             let newMode = [...mode];
+//             newMode[1] = '씨에스에스';
+//             modeChange(newMode);
+//           }}>{mode[1]}</a>
+//         </li>
+//         <li>
+//           <a href="/" onClick={(event)=>{
+//             event.preventDefault();
+//             let newMode = [...mode];
+//             newMode[2] = '자바스크립트';
+//             modeChange(newMode); 
+//           }}>{mode[2]}</a>
+//         </li>
+//       </ol>
+//     </div>
+//   )
+// }
+// export default App;
+
+
+// ----------------------------- State Props Component start ----------------------------
+
 import {useState} from 'react';
 
+function Modal(props){
+  return(
+    <section>
+      <h2>{props.title}</h2>
+      <p>{props.content}</p>
+    </section>
+  );
+}
+
 function App(){
-  let [mode,modeChange] = useState(['html','css','javascript']);
+  let [btnNum,btnNumChange] = useState(0); 
+  let [제목,제목변경] = useState(['html','css','javascript']);
+  let [내용,내용변경] = useState(['dfsaffwfwefkjnhskjnfjksndfjkd','afljmqmkamfldsjflelwef','bxjmiemkmlmqlkwmdkvo']);
 
   return(
     <div className='App'>
-      <button type="submit" onClick={
-        (event)=>{
-          event.preventDefault();
-          modeChange(['1','css','javascript']);
-        }
-      }>클릭</button>
-      <ol>
-        <li>
-          <a href="/">{mode[0]}</a>
-        </li>
-        <li>
-          <a href="/">{mode[1]}</a>
-        </li>
-        <li>
-          <a href="/">{mode[2]}</a>
-        </li>
-      </ol>
+      <button onClick={()=>{
+        btnNumChange(0);
+      }}>버튼1</button>
+      <button onClick={()=>{
+        btnNumChange(1);
+      }}>버튼2</button>
+      <button onClick={()=>{
+        btnNumChange(2);
+      }}>버튼3</button>
+      <Modal title={제목[btnNum]} content={내용[btnNum]}/>
     </div>
-  )
+  );
 }
+
 export default App;

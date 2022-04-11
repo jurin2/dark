@@ -1,69 +1,53 @@
+import {useState} from 'react';
 import './App.css';
-
 function Header(props){
-  return(
+  return (
     <header>
-      <h1 className='mainTit'><a href="/">WEB</a></h1>
+      <h1 className="mainTit">
+        <a href="/" onClick={props.onMsClick}>WEB</a>
+      </h1>
     </header>
-  )
+  );
 }
-function Nav(props){
-  let navList = [];
-  props.topics.map((item,idx)=>{
-    navList[idx] = 
-    <li>
-      <a href="#">{item.title}</a>
-    </li>
-  })
-  return(
+function Nav(props){  
+  let liList = [];
+  for(let idx=0;idx<props.navs.length;idx++){
+    liList.push(<li key={props.navs[idx].id}><a id={props.navs[idx].id} href={props.navs[idx].id} onClick={props.onMsClick}>{props.navs[idx].title}</a></li>);
+  }      
+  return (
     <nav>
       <ol>
-        {navList}
+        {liList}
       </ol>
     </nav>
-  )
+  );
+  
 }
 function Section(props){
-  return(
+  return (
     <section>
-      <h2>WEB이란?</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique illum at natus labore quidem magni accusamus dicta accusantium amet explicabo, ullam a impedit atque distinctio nam blanditiis odio animi voluptates.
-        In at, aperiam maiores ducimus accusantium nulla voluptatem repudiandae ex nemo, quia deleniti, fugit cum ipsam. Officia adipisci cum asperiores eum vitae dolorum, molestiae quos tenetur eaque modi magni laboriosam?
-        Voluptas placeat esse corrupti similique rerum consequatur fugit tempore delectus necessitatibus rem porro, eum tenetur nobis impedit ullam quisquam beatae laboriosam? Eos unde harum dicta culpa! Est placeat ad voluptate.
-        Adipisci at minima libero, laboriosam iste commodi, possimus corrupti tenetur, optio ratione quod et. Eveniet aliquid cupiditate et reiciendis sed repellat voluptates quod illum rerum, sunt, laudantium a, reprehenderit amet.
-        Dolor, tempora! Perferendis cumque veritatis consequatur? Illo quis odit aliquam est impedit eveniet necessitatibus temporibus omnis, porro praesentium, qui natus voluptatum magnam voluptas fugiat atque rem aliquid, tenetur ex error.   
-      </p>
+      <h2>{props.title}</h2>
+      <p>{props.content}</p>
     </section>
-  )
+  );
 }
-
 function App() {
-  let topic = [
-    {title:'WEB'},
-    {title:'CSS'},
-    {title:'javaScript'}
-  ]
-  let content = [
-    {title:'WEB이란?', con:'WEB의 대한 설명 WEB의 대한 설명 WEB의 대한 설명 WEB의 대한 설명 WEB의 대한 설명'},
-    {title:'CSS이란?', con:'CSS의 대한 설명 CSS의 대한 설명 CSS의 대한 설명 CSS의 대한 설명 CSS의 대한 설명'},
-    {title:'javaScript이란?', con:'javaScript의 대한 설명 javaScript의 대한 설명 javaScript의 대한 설명 javaScript의 대한 설명 javaScript의 대한 설명'}
-  ]
-  return(
-    <div className='App'>
-      <Header/>
-      <Nav topics={topic}/>
-      <Section/>
-    
-    </div>
-  )
+  let navList = [
+    {id:1, title:'HTML'},
+    {id:2, title:'CSS'},
+    {id:3, title:'javaScript'},
+  ];
+  let [idx,idxChange]=useState(0);  
+  let [title,titleChange]=useState(['WEB','HTML','CSS','javaScript']);
+  let [content,contentChange]=useState(['WEB의 내용 WEB의 내용 WEB의 내용','HTML의 내용 HTML의 내용 HTML의 내용','CSS의 내용 CSS의 내용 CSS의 내용','javaScript의 내용 javaScript의 내용']);
+
+  return (
+    <div className="App">      
+      <Header onMsClick={(event)=>{event.preventDefault();idxChange(0)}}/>
+      <Nav navs={navList} onMsClick={(event)=>{event.preventDefault();idxChange(event.target.id)}}/>
+      <Section title={title[idx]} content={content[idx]}/>
+    </div>    
+  );
 }
 
 export default App;
-
-
-
-
-
-
-

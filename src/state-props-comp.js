@@ -12,22 +12,22 @@ function Modal(props){
 }
 
 function App(){
-  let [btnNum,btnNumChange] = useState(0); 
-  let [제목,제목변경] = useState(['html','css','javascript']);
-  let [내용,내용변경] = useState(['dfsaffwfwefkjnhskjnfjksndfjkd','afljmqmkamfldsjflelwef','bxjmiemkmlmqlkwmdkvo']);
+  let [idx,idxChange] = useState(0); 
+  let [title,titleChange] = useState(['html','css','javascript']);
+  let [content,contentChange] = useState(['htmlhtmlhtmlhtmlhtml','csscsscsscsscss','javascriptjavascriptjavascriptjavascriptjavascript']);
 
   return(
     <div className='App'>
       <button onClick={()=>{
-        btnNumChange(0);
+        idxChange(0);
       }}>버튼1</button>
       <button onClick={()=>{
-        btnNumChange(1);
+        idxChange(1);
       }}>버튼2</button>
       <button onClick={()=>{
-        btnNumChange(2);
+        idxChange(2);
       }}>버튼3</button>
-      <Modal title={제목[btnNum]} content={내용[btnNum]}/>
+      <Modal title={title[idx]} content={content[idx]}/>
     </div>
   );
 }
